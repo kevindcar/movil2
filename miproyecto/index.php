@@ -3,7 +3,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="es">
+< lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,16 +41,32 @@
 
     </style>
 </head>
-<body>
+<>
 
     <header>
         <a href="./views/login.php">Login</a>
         <a href="./views/Registro.php">Registrar</a>
     </header>
+    <div class="welcome-container">
+    <!-- Capa de fondo oscura -->
+    <div class="overlay"></div>
 
-    <div class="caja">
-        <h1>vista de index</h1>
-        
+    <!-- Contenido principal de la bienvenida -->
+    <div class="content">
+        <h1>¡Bienvenido, <?php echo $_SESSION['user_name']; ?>!</h1>
+        <p>Disfruta de nuestra plataforma personalizada para ti</p>
+
+        <!-- Imagen de perfil del usuario -->
+        <div class="profile-image">
+            <img src="../ruta/de/imagenes/<?php echo $_SESSION['user_imagen']; ?>" alt="Imagen de perfil">
+        </div>
+
+        <!-- Botón para ir al dashboard -->
+        <a href="dashboard.php">
+            <button class="start-button">Comenzar</button>
+        </a>
     </div>
+</div>
+
 </body>
 </html>
