@@ -42,37 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($emailExiste) {
         $errores['email'] = 'El correo electrónico ya está registrado.';
     }
+       // Si no hay errores, proceder con el registro
+       if (empty(array_filter($errores))) {
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-    $errores['imagen'] = '';
-    $imagenPerfilPath = '';
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Existing validations...
-
-        // Handle image upload
-        if (isset($_FILES['imagen_perfil']) && $_FILES['imagen_perfil']['error'] === 0) {
-            $image = $_FILES['imagen_perfil'];
-            $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-
-            // Check if the file is an image
-            if (!in_array($image['type'], $allowedTypes)) {
-                $errores['imagen'] = 'Solo se permiten archivos JPEG, PNG o GIF.';
-            } else {
-                // Move the file to the desired directory (e.g., 'uploads/')
-                $uploadDir = '../uploads/';
-                $imagenPerfilPath = $uploadDir . basename($image['name']);
-
-                if (!move_uploaded_file($image['tmp_name'], $imagenPerfilPath)) {
-                    $errores['imagen'] = 'Error al subir la imagen.';
-                }
-            }
-        } else {
-            $errores['imagen'] = 'Debe seleccionar una imagen.';
-        }
-
-        // If there are no errors, proceed to save the user information
-        if (empty(array_filter($errores))) {
-            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
             $sql = "INSERT INTO usuarios (nombre, email, password, rol, imagen_perfil) VALUES (:nombre, :email, :password , :rol, :imagen_perfil)";
             $stmt = $conexion->prepare($sql);
@@ -90,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     }
-}
+
 ?>
 
 <!DOCTYPE html>
