@@ -127,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="caja">
         <div>
-            <img class="animacion" src="../img/animacion.gif" alt="pantera rosa">
+            <img class="animacion" src="../img/animacion.gif" alt="">
         </div>
         <form method="post">
             <h2>Inicio de Sesión</h2>
